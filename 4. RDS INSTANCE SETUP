@@ -1,0 +1,44 @@
+We will create our database in the private data subnet
+
+Firstly we need to create subnets group
+Subnet group details
+Name : database-subnet
+Description : database-subnet
+VPC : Dev-VPC
+Add subnets
+Availability Zones : us-east-1a, us-east-1b
+Subnets : Private Data Subnet AZ1 10.0.4.0/24  and Private Data Subnet AZ2 10.0.5.0/24 
+
+Then Click Create
+
+NEXT ***CREATE DATABASE***
+
+Click database and create database
+
+Choose a database creation method : Standard create
+Engine type : MySQL
+Engine Version : MySQL 8.0.36
+Templates : Dev/Test
+Availability and durability
+Deployment options: Single DB instance
+DB instance identifier : dev-rds-db
+Master username : abdullahi
+Master password : give password
+DB instance class : Burstable classes (includes t classes) 
+                    also toggle Include previous generation classes
+                    db.t3.micro
+Storage type : GENERAL PURPOSE SSD GP2
+Allocated storage : 400 GIB
+Connectivity 
+Compute resource : Don’t connect to an EC2 compute resource
+Network type: IPv4
+Virtual private cloud (VPC) : Dev-VPC
+Existing VPC security groups : DATABASE SG
+Availability Zone : us-east-1b
+Database authentication options : Password authentication
+Additional configuration
+Initial database name : give a name applicationdb
+
+Then click Create Database
+
+

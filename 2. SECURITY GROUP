@@ -1,0 +1,40 @@
+***CREATING SECURITY GROUPS***
+Click Security group 
+Create security group
+Security group name : EICE SECURITY GROUP
+Description : EICE SECURITY GROUP
+VPC: Dev-VPC
+Inbound rules : NO Inbound
+Outbound rules 
+Type : SSH 
+Port : 22
+Destination source : OUR VPC CIDR BLOCK 10.0.0.0/16
+
+CLICK CREATE SECURITY GROUP
+
+Click Security group 
+Create security group
+Security group name : DATA MIGRATION SERVER SECURITY GROUP
+Description : DATA MIGRATION SERVER SECURITY GROUP
+VPC: Dev-VPC
+Inbound rules 
+Type : SSH 
+Port : 22
+Destination source : EICE SECURITY GROUP
+Outbound rules : ALL TRAFFIC
+
+CLICK CREATE SECURITY GROUP
+
+Click Security group 
+Create security group
+Security group name : DATABASE SG
+Description : DATABASE SG
+VPC: Dev-VPC
+Inbound rules 
+Type : MYSQL/AURORA 
+Port : 3306
+Destination source : DATA MIGRATION SERVER SECURITY GROUP
+Outbound rules : ALL TRAFFIC
+
+CLICK CREATE SECURITY GROUP
+

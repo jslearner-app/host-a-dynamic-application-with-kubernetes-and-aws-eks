@@ -1,0 +1,12 @@
+Go to github 
+create a new repository
+repository name
+addme
+click create repository
+
+Next. Clone the repo on our pc
+Go to powershel
+type git clone and URL of the repository
+
+Next add our application code to the repository
+

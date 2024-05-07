@@ -1,0 +1,11 @@
+*** CREATING AN EC2 INSTANCE ENDPOINT ***
+In the VPC Dashboard scrol down and click Endpoint
+Click create endpoint
+Name tag : DEV EICE
+Service category : select EC2 Instance Connect Endpoint
+VPC : Dev-VPC
+Security groups : EICE SECURITY GROUP
+Subnet : select Private App Subnet AZ2
+
+Then click create Endpoint
+

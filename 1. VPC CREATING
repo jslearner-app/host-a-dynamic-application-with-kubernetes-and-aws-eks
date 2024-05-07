@@ -1,0 +1,125 @@
+first select the region you want to create the VPC
+Type VPV in the search bar and click VPC
+Click create VPC
+Choose VPC only
+Name tag : Dev VPC
+IPv4 CIDR block : choose IPv4 CIDR manual input
+IPv4 CIDR : 10.0.0.0/16
+IPv6 CIDR block : No IPv6 CIDR block
+Tenancy : Default
+CLICK CREATE VPC
+
+Next Enable host name in the vpc
+select vpc --- click action ---- edit vpc setting --- check enable dns host name
+
+***INTERNET GATEWAY***
+
+Next Create Internet Gateway
+
+Name tag : Dev Internet Gateway
+then click create Internet Gateway
+
+Next attach Internet Gateway to the VPC to allow the resources in our VPC to communicate to the Internet.
+
+*** 2 PUBLIC SUBNET CREATION***
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Public Subnet AZ1
+Availability Zone : us-east-1a
+IPv4 subnet CIDR block :10.0.0.0/24
+Then click create subnet.
+
+Create another subnet 
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Public Subnet AZ2
+Availability Zone : us-east-1b
+IPv4 subnet CIDR block :10.0.1.0/24
+Then click create subnet.
+
+NEXT Enable Auto Assign Ip on both public subnet so that anytime you launch ec2 instance on both public subnet they will assign a public ipv4 address on any resourse you have in it; like EC2 instance.
+
+NEXT ***CREATE A PUBLIC ROUTE TABLE FOR THE 2 PUBLIC SUBNET***
+
+Click route table 
+Create route table
+Name : Public Route table
+VPC : select your VPC
+Then click create route table
+
+Next is to add a public route to the route table. This will allow the public route table to route traffic to the Internet.
+Click Edit Route 
+click add route
+Destination : 0.0.0.0/0
+Target : Internet Gateway ---- igw
+then click save changes
+
+Next is to associate the 2 public subnet to the route table
+Click Subnet Association
+Click Edit subnet Association
+add the 2 public subnet to the association and save association.
+
+***  PRIVATE APP SUBNET TO STORE OUR APP SERVER ***
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Private App Subnet AZ1
+Availability Zone : us-east-1a
+IPv4 subnet CIDR block :10.0.2.0/24
+Then click create subnet.
+
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Private App Subnet AZ2
+Availability Zone : us-east-1b
+IPv4 subnet CIDR block :10.0.3.0/24
+Then click create subnet.
+
+**** CREATE DATA SUBNET TO STORE OUR DATABASE ***
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Private Data Subnet AZ1
+Availability Zone : us-east-1a
+IPv4 subnet CIDR block :10.0.4.0/24
+Then click create subnet.
+
+Create subnet ----- select VPC
+VPC ID : Dev VPC
+Subnet name : Private Data Subnet AZ2
+Availability Zone : us-east-1b
+IPv4 subnet CIDR block :10.0.5.0/24
+Then click create subnet.
+
+*** NAT GATEWAY CREATION***
+Create a Nat Gateway
+Click Nat Gateway
+Create Nat Gateway
+Name: Nat Gateway AZ1
+Subnet : Public Subnet AZ1 Nat gateway always in the public subnet
+Connectivity type : select Public
+Elastic IP allocation ID : Click Allocate Elastic IP
+
+Then click Create Nat Gateway.
+
+NEXT *** CREATE PRIVATE ROUTE TABLE***
+
+Click route table
+Create route table
+Name : Private Route Table AZ1
+VPC: select your vpc
+then click create route table
+
+Next add a route to the private route table to route traffic to the Internet through the nat gateway in the public subnet az1
+Click Edit Route 
+click add route
+Destination : 0.0.0.0/0
+Target : Nat Gateway ---- NAT
+then click save changes
+
+Next is to associate the private  Subnet to the private route table
+Click Subnet Association
+Click Edit subnet Association
+add the private App Subnet AZ1, private App Subnet AZ2, Private Data Subnet AZ1 and Private Data Subnet AZ2 to the association and save association.
+
+
+
+
